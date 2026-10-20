@@ -1,0 +1,101 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Prenda deportiva de la colección ALTURA 2335",
+      "type": "object",
+      "properties": {
+        "slug": { "type": "string", "maxLength": 100 },
+        "nombre": { "type": "string", "maxLength": 150 },
+        "linea": { "type": "string", "enum": ["Running", "Training", "Altura"] },
+        "composicion": { "type": "string", "maxLength": 200 },
+        "publico": { "type": "string", "enum": ["Hombre", "Mujer", "Unisex"] },
+        "precio": { "type": "number" },
+        "stock": { "type": "number" },
+        "descripcion": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["slug", "nombre", "linea", "composicion", "publico", "precio", "stock"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Pedido de cliente en la tienda",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 50 },
+        "subtotal": { "type": "number" },
+        "discount": { "type": "number" },
+        "shipping": { "type": "number" },
+        "total": { "type": "number" },
+        "estado": { "type": "string", "enum": ["Pendiente", "Confirmado", "En camino", "Entregado"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "subtotal", "total", "estado"]
+    },
+    "Lead": {
+      "title": "Lead",
+      "description": "Registro de interesado en Run Club o guía técnica",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 50 },
+        "email": { "type": "string", "maxLength": 150 },
+        "nombre": { "type": "string", "maxLength": 100 },
+        "tipo": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "email"]
+    },
+    "Complaint": {
+      "title": "Complaint",
+      "description": "Hoja de reclamación virtual conforme a Indecopi",
+      "type": "object",
+      "properties": {
+        "ticket": { "type": "string", "maxLength": 50 },
+        "nombre": { "type": "string", "maxLength": 150 },
+        "documento": { "type": "string", "maxLength": 50 },
+        "email": { "type": "string", "maxLength": 150 },
+        "telefono": { "type": "string", "maxLength": 50 },
+        "direccion": { "type": "string", "maxLength": 300 },
+        "tipo": { "type": "string", "maxLength": 50 },
+        "descripcion": { "type": "string", "maxLength": 2000 },
+        "pedidoConsumidor": { "type": "string", "maxLength": 1000 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["ticket", "nombre", "email", "descripcion"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Perfil de usuario o atleta registrado",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "nombre": { "type": "string", "maxLength": 150 },
+        "email": { "type": "string", "maxLength": 150 },
+        "whatsapp": { "type": "string", "maxLength": 50 },
+        "role": { "type": "string", "enum": ["user", "admin"] }
+      },
+      "required": ["id", "nombre", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Catálogo de prendas y existencias en inventario"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Registro de pedidos para entrega en Arequipa y seguimiento"
+    },
+    "/leads/{leadId}": {
+      "schema": { "$ref": "#/entities/Lead" },
+      "description": "Inscripciones al Run Club y descargas de la guía 2335"
+    },
+    "/complaints/{complaintId}": {
+      "schema": { "$ref": "#/entities/Complaint" },
+      "description": "Libro de reclamaciones virtual registrado"
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Perfiles de usuarios y administradores"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Urban Vibe Sport · ALTURA 2335",
+  "description": "Tienda oficial de Urban Vibe Sport · ALTURA 2335. Ropa deportiva inspirada en Arequipa y confeccionada con algodón pima, baby alpaca y merino.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
